@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Selenium Easy Project]">
+  <parameter name="baseURL" value="https://www.seleniumeasy.com/test/"/>
+  <parameter name="browser" value="chrome"/>
+  <test thread-count="5" name="Simple Form Demo Test(failed)">
+    <classes>
+      <class name="simpleFormDemo.SimpleFormDemo">
+        <methods>
+          <include name="simpleForm"/>
+          <include name="beforeMethod"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- simpleFormDemo.SimpleFormDemo -->
+    </classes>
+  </test> <!-- Simple Form Demo Test(failed) -->
+</suite> <!-- Failed suite [Selenium Easy Project] -->

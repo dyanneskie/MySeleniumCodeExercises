@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="7958" started-at="2019-05-05T13:32:31Z" finished-at="2019-05-05T13:32:39Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="7958" started-at="2019-05-05T13:32:31Z" finished-at="2019-05-05T13:32:39Z">
+      <class name="simpleFormDemo.SimpleFormDemo">
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:simpleFormDemo.SimpleFormDemo@29774679]" name="beforeMethod" is-config="true" duration-ms="5254" started-at="2019-05-05T13:32:31Z" finished-at="2019-05-05T13:32:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="simpleForm(java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:simpleFormDemo.SimpleFormDemo@29774679]" name="simpleForm" duration-ms="1676" started-at="2019-05-05T13:32:36Z" data-provider="getTestData" finished-at="2019-05-05T13:32:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Hello World]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[20.16]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[12.6]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[32.76]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- simpleForm -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:simpleFormDemo.SimpleFormDemo@29774679]" name="tearDown" is-config="true" duration-ms="640" started-at="2019-05-05T13:32:38Z" finished-at="2019-05-05T13:32:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- simpleFormDemo.SimpleFormDemo -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
