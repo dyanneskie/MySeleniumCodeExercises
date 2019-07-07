@@ -17,71 +17,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import excelUtility.Xls_GetData;
 
 public class SimpleFormDemo {
-	static WebDriver driver;
+	WebDriver driver;
 	SoftAssert softAssert = new SoftAssert();
 
 	@BeforeMethod
-	// @Parameters({ "baseURL", "browser" })
-	// String baseURL, String browser
+	@Parameters({ "browser", "formDemoURL" })
+	public void beforeMethod(String browser, String formDemoURL) {
 
-	public void beforeMethod() {
-
-		/*
-		 * if (browser.equals("chrome")) { System.setProperty("webdriver.chrome.driver",
-		 * "E:\\Workspace\\lib\\chrome\\chromedriver.exe");
-		 * 
-		 * Map<String, Object> prefs = new HashMap<String, Object>();
-		 * prefs.put("profile.default_content_setting_values.notifications", 2);
-		 * ChromeOptions options = new ChromeOptions();
-		 * options.setExperimentalOption("prefs", prefs);
-		 * 
-		 * driver = new ChromeDriver(options); } if (browser.equals("firefox")) {
-		 * System.setProperty("webdriver.gecko.driver",
-		 * "E:\\Workspace\\lib\\gecko\\geckodriver.exe");
-		 * 
-		 * DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-		 * capabilities.setCapability("marionette", true); driver = new
-		 * FirefoxDriver(capabilities);
-		 * 
-		 * }
-		 */
-
-		/*
-		 * driver.manage().window().maximize(); driver.manage().deleteAllCookies();
-		 * driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-		 * driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		 * driver.get(baseURL);
-		 */
-
-		System.setProperty("webdriver.chrome.driver", "E:\\Workspace\\lib\\chrome\\chromedriver.exe");
-
-		Map<String, Object> prefs = new HashMap<String, Object>();
-		prefs.put("profile.default_content_setting_values.notifications", 2);
-		ChromeOptions options = new ChromeOptions();
-		options.setExperimentalOption("prefs", prefs);
-
-		driver = new ChromeDriver(options);
-		driver.manage().window().maximize();
-		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get("https://www.seleniumeasy.com/test/");
-
-		WebElement startPractice = driver.findElement(By.id("btn_basic_example"));
-		startPractice.click();
-
-		WebElement formDemo = driver
-				.findElement(By.xpath("//div[@class=\"list-group\"]//a[contains(text (),\"Simple Form Demo\")]"));
-		formDemo.click();
+		this.initialisation(browser, formDemoURL);
 	}
 
 	@DataProvider
@@ -94,6 +49,7 @@ public class SimpleFormDemo {
 	@Test(dataProvider = "getTestData")
 	public void simpleForm(String enterMsg, String enterA, String enterB, String getTotal) {
 
+		// Single Input Field
 		WebElement userMsg = driver.findElement(By.xpath("//input[@id=\"user-message\"]"));
 		userMsg.sendKeys(enterMsg);
 
@@ -108,6 +64,8 @@ public class SimpleFormDemo {
 
 		this.captureScreenShot(driver);
 
+		// Two Input Field
+
 		WebElement sum1 = driver.findElement(By.xpath("//input[@id=\"sum1\"]"));
 		sum1.sendKeys(enterA);
 
@@ -118,19 +76,24 @@ public class SimpleFormDemo {
 		showTotal.click();
 
 		// Verify Get Total
-
 		WebElement totalDisplay = driver.findElement(By.xpath("//span[@id=\"displayvalue\"]"));
 		System.out.println("Display total is " + totalDisplay.getText());
 
 		float floatValue = Float.parseFloat(getTotal);
 		int intValue = (int) floatValue;
 
-		softAssert.assertEquals(totalDisplay.getText(),intValue + "");
+		softAssert.assertEquals(totalDisplay.getText(), intValue + "");
 
 		this.captureScreenShot(driver);
 
 		softAssert.assertAll();
 
+	}
+
+
+	@AfterMethod
+	public void tearDown() {
+		driver.quit();
 	}
 
 	private void captureScreenShot(WebDriver driver) {
@@ -145,8 +108,36 @@ public class SimpleFormDemo {
 		}
 	}
 
-	@AfterMethod
-	public void tearDown() {
-		driver.quit();
+	private void initialisation(String browser, String formDemoURL) {
+		if (browser.equals("chrome")) {
+			System.setProperty("webdriver.chrome.driver", "E:\\Workspace\\lib\\chrome\\chromedriver.exe");
+
+			Map<String, Object> prefs = new HashMap<String, Object>();
+			prefs.put("profile.default_content_setting_values.notifications", 2);
+			ChromeOptions options = new ChromeOptions();
+			options.setExperimentalOption("prefs", prefs);
+
+			driver = new ChromeDriver(options);
+
+		}
+		if (browser.equals("firefox")) {
+			System.setProperty("webdriver.gecko.driver", "E:\\Workspace\\lib\\gecko\\geckodriver.exe");
+			driver = new FirefoxDriver();
+
+			/*
+			 * DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+			 * capabilities.setCapability("marionette", true); driver = new
+			 * FirefoxDriver(capabilities);
+			 */
+
+		}
+		// Get URL
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.get(formDemoURL);
+
 	}
+
 }

@@ -7,11 +7,15 @@
 <!--	 </listeners> -->  
 	
 		<parameter name ="browser" value="chrome" />
-		<parameter name ="baseURL" value="https://www.seleniumeasy.com/test/" />
+		<parameter name ="formDemoURL" value="https://www.seleniumeasy.com/test/basic-first-form-demo.html" />
+		<parameter name ="checkboxURL" value="https://www.seleniumeasy.com/test/basic-checkbox-demo.html" />
+		<parameter name ="radiobuttonURL" value="https://www.seleniumeasy.com/test/basic-radiobutton-demo.html" />
 		
 	<test name="Simple Form Demo Test">		
 		<classes>
-			<class name="simpleFormDemo.SimpleFormDemo" />
+			
+			<class name="simpleFormDemo.SimpleFormDemo" />  
+			<class name="basicCheckboxDemo.CheckboxDemo" /> 
 		</classes>
 		
 	</test>
